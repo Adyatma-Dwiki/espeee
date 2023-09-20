@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1073440006416",
+    "project_id": "espeee-6a087",
+    "storage_bucket": "espeee-6a087.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073440006416:android:92c363a104b167fabbc595",
+        "android_client_info": {
+          "package_name": "com.example.espeee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7a4NNppiWeQSjtLUBfKC5vD_S3sFLVoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
