@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1073440006416',
     projectId: 'espeee-6a087',
     authDomain: 'espeee-6a087.firebaseapp.com',
+    databaseURL: 'https://espeee-6a087-default-rtdb.firebaseio.com',
     storageBucket: 'espeee-6a087.appspot.com',
   );
 
@@ -57,6 +58,7 @@ class DefaultFirebaseOptions {
     appId: '1:1073440006416:android:92c363a104b167fabbc595',
     messagingSenderId: '1073440006416',
     projectId: 'espeee-6a087',
+    databaseURL: 'https://espeee-6a087-default-rtdb.firebaseio.com',
     storageBucket: 'espeee-6a087.appspot.com',
   );
 
@@ -65,6 +67,7 @@ class DefaultFirebaseOptions {
     appId: '1:1073440006416:ios:64b6fe2b43bbb297bbc595',
     messagingSenderId: '1073440006416',
     projectId: 'espeee-6a087',
+    databaseURL: 'https://espeee-6a087-default-rtdb.firebaseio.com',
     storageBucket: 'espeee-6a087.appspot.com',
     iosBundleId: 'com.example.espeee',
   );
@@ -74,6 +77,7 @@ class DefaultFirebaseOptions {
     appId: '1:1073440006416:ios:d7387dab783e4059bbc595',
     messagingSenderId: '1073440006416',
     projectId: 'espeee-6a087',
+    databaseURL: 'https://espeee-6a087-default-rtdb.firebaseio.com',
     storageBucket: 'espeee-6a087.appspot.com',
     iosBundleId: 'com.example.espeee.RunnerTests',
   );

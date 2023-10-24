@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:animate_do/animate_do.dart';
 import 'package:espeee/home.dart';
+import 'package:espeee/home2.dart';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -20,7 +22,7 @@ class _LoadscreenState extends State<Loadscreen> {
     Future.delayed(Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => HomePage(), 
+          builder: (context) => HomePageList(), 
         ),
       );
     });
