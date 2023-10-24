@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   void listenToLength() {
     _databaseReference.child('Controller/Length').onValue.listen((event) {
       final value = event.snapshot.value;
-      if (value != null && value is int) {
+      if (value != null && value is double) {
         setState(() {
           length = value.toString();
         });
@@ -123,6 +123,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE5CFF7),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFE5CFF7),
+        elevation: 0.0,
+      ),
       body: ListView(// Wrap with ListView to enable scrolling
           children: [
         RefreshIndicator(
@@ -132,107 +136,121 @@ class _HomePageState extends State<HomePage> {
             listenToRollerSpeed();
           },
           child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                FadeInDown(
-                  duration: Duration(seconds: 1),
-                  child: Container(
-                    margin: EdgeInsets.only(top: 80),
-                    width: 300,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Image.asset(
-                      'assets/images/snowglobe.png',
-                      fit: BoxFit.contain,
-                    ),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              FadeInDown(
+                duration: Duration(seconds: 1),
+                child: Container(
+                  margin: EdgeInsets.only(top: 80),
+                  width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Image.asset(
+                    'assets/images/snowglobe.png',
+                    fit: BoxFit.contain,
                   ),
                 ),
-                SizedBox(height: 20),
-                FadeInDown(
-                  duration: Duration(seconds: 1),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width - 40,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Color(0x725b0888),
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Length : $length cm',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          height: 1.5,
-                          fontStyle: FontStyle.italic,
-                          color: Color(0xffffffff),
+              ),
+              SizedBox(height: 20),
+              FadeInDown(
+                duration: Duration(seconds: 2),
+                child: Container(
+                  width: 406,
+                  height: 600,
+                  decoration: BoxDecoration(
+                    color: Color(0xffffffff),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment
+                        .center, // Center the content horizontally
+                    children: [
+                      SizedBox(height: 40),
+                      FadeInDown(
+                        duration: Duration(seconds: 1),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width - 40,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Color(0x725b0888),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Center(
+                            child:
+                             Text(
+                              'Length : $length cm',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                height: 1.5,
+                                fontStyle: FontStyle.italic,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                FadeInDown(
-                  duration: Duration(seconds: 1),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width - 40,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Color(0x725b0888),
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Roller Speed : $rollerSpeed rpm',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          height: 1.5,
-                          fontStyle: FontStyle.italic,
-                          color: Color(0xffffffff),
+                      SizedBox(height: 20),
+                      FadeInDown(
+                        duration: Duration(seconds: 1),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width - 40,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Color(0x725b0888),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Roller Speed : $rollerSpeed rpm',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                height: 1.5,
+                                fontStyle: FontStyle.italic,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      SizedBox(height: 100),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                rollerSpeedValue += speedIncrement;
+                                updateRollerSpeed();
+                              });
+                            },
+                            icon: Icon(Icons.add),
+                            iconSize: 50,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                rollerSpeedValue -= speedDecrement;
+                                updateRollerSpeed();
+                              });
+                            },
+                            icon: Icon(Icons.remove),
+                            iconSize: 50,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          rollerSpeedValue += speedIncrement;
-                          updateRollerSpeed();
-                        });
-                      },
-                      icon: Icon(Icons.add),
-                    ),
-                    Text(
-                      rollerSpeedValue
-                          .toStringAsFixed(1), // Display roller speed value
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          rollerSpeedValue -= speedDecrement;
-                          updateRollerSpeed();
-                        });
-                      },
-                      icon: Icon(Icons.remove),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              ),
+            ]),
           ),
         ),
       ]),

@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:animate_do/animate_do.dart';
 import 'package:espeee/home.dart';
+import 'package:espeee/loadingscreen.dart';
 import 'package:flutter/material.dart';
 
 import 'components/mybutton.dart';
@@ -40,7 +41,7 @@ class SplashScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => Loadscreen(),
                       ),
                     );
                   },
