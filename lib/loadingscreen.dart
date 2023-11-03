@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:animate_do/animate_do.dart';
-import 'package:espeee/home.dart';
-import 'package:espeee/home2.dart';
+import 'package:espeee/GridView.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -19,10 +19,10 @@ class _LoadscreenState extends State<Loadscreen> {
   void initState() {
     super.initState();
     
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => HomePageList(), 
+          builder: (context) => GridPage(), 
         ),
       );
     });
@@ -31,7 +31,7 @@ class _LoadscreenState extends State<Loadscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE5CFF7) ,
+      backgroundColor: const Color(0xFFFFC0CB) ,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

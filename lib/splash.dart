@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:animate_do/animate_do.dart';
-import 'package:espeee/home.dart';
 import 'package:espeee/loadingscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +12,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE5CFF7),
+      backgroundColor: const Color(0xFFFFC0CB),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
