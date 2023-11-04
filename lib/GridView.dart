@@ -3,11 +3,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 class GridPage extends StatelessWidget {
   final firebaseService = FirebaseDataService();
-  
   List<String> below100IDs = [];
 
   GridPage({super.key});
@@ -185,23 +183,30 @@ class DataCard extends StatelessWidget {
 
 class FirebaseDataService {
   Stream<List<DataItem>> getDataStream() {
-    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
-    return databaseReference.onValue.map((event) {
-      final dataMap = event.snapshot.value as Map<String, dynamic>;
-      List<DataItem> dataList = [];
+  final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
+  return databaseReference.onValue.map((event) {
+    final dataMap = event.snapshot.value as Map<String, dynamic>;
+    if (dataMap == null) {
+      return <DataItem>[];
+    }
 
-      dataMap.forEach((key, value) {
+    List<DataItem> dataList = [];
+
+    dataMap.forEach((key, value) {
+      if (value is Map<String, dynamic>) {
         dataList.add(DataItem(
           id: key,
           location: value['Location'] ?? 'Unknown Location',
           state: value['State'] ?? false,
           width: value['Width'] ?? 0,
         ));
-      });
-
-      return dataList;
+      }
     });
-  }
+
+    return dataList;
+  });
+}
+
 
   Future<void> deleteData(String id) async {
     final DatabaseReference databaseReference =
