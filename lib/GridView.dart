@@ -1,4 +1,6 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
+
+import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +28,7 @@ class GridPage extends StatelessWidget {
             padding: const EdgeInsets.all(11),
             child: Container(
               // Container for the image
-              height: 350, // Adjust the height as needed
+              height: 300, // Adjust the height as needed
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
@@ -41,7 +43,7 @@ class GridPage extends StatelessWidget {
             padding: EdgeInsets.only(left: 10, right: 10, top: 20),
             margin: const EdgeInsets.only(
                 top:
-                    350), // Adjust the margin to position the grid below the image
+                    300), // Adjust the margin to position the grid below the image
             child: StreamBuilder<List<DataItem>>(
               stream: FirebaseDataService().getDataStream(),
               builder: (context, snapshot) {
@@ -117,75 +119,74 @@ class DataCard extends StatelessWidget {
   final FirebaseDataService firebaseService;
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 10, // Add elevation for a shadow effect
-      margin: const EdgeInsets.all(10),
-
-      child: ListTile(
-        title: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('ID: ${item.id}'),
-              Text('Location: ${item.location}'),
-              Text('State: ${item.state ? 'True' : 'False'}'),
-              Text('Width: ${item.width} cm'),
-
-              // Add buttons for actions
-              const SizedBox(height: 90),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Confirm Deletion'),
-                          content: const Text(
-                              'Are you sure you want to delete this item?'),
-                          actions: [
-                            TextButton(
-                              child: const Text('Cancel'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            TextButton(
-                              child: const Text('Delete'),
-                              onPressed: () {
-                                // Delete the item from Firebase
-                                firebaseService.deleteData(item.id);
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: const Text('Delete'),
-                ),
-              ),
-            ],
+Widget build(BuildContext context) {
+  return Card(
+    elevation: 10,
+    margin: const EdgeInsets.all(10),
+    child: Stack(
+      children: [
+        ListTile(
+          title: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
+              children: [
+                Text('ID: ${item.id}'),
+                Text('Location: ${item.location}'),
+                Text('State: ${item.state ? 'True' : 'False'}'),
+                Text('Width: ${item.width} cm'),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+        Positioned(
+          bottom: 0,
+          right: 5,
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Confirm Deletion'),
+                    content: const Text('Are you sure you want to delete this item?'),
+                    actions: [
+                      TextButton(
+                        child: const Text('Cancel'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('Delete'),
+                        onPressed: () {
+                          // Delete the item from Firebase
+                          firebaseService.deleteData(item.id);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const Text('Delete'),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }
 
 class FirebaseDataService {
   Stream<List<DataItem>> getDataStream() {
   final DatabaseReference databaseReference = FirebaseDatabase.instance.ref();
   return databaseReference.onValue.map((event) {
-    final dataMap = event.snapshot.value as Map<String, dynamic>;
+    final Map<String, dynamic> dataMap = jsonDecode(jsonEncode(event.snapshot.value)) as Map<String, dynamic>;
     if (dataMap == null) {
       return <DataItem>[];
     }
