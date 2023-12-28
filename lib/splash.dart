@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFC0CB),
+      backgroundColor: Color.fromRGBO(255, 192, 203, 1),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +26,7 @@ class SplashScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Image.asset(
-                  'assets/images/splash.png',
+                  'assets/images/tr.gif',
                   fit: BoxFit.contain,
                 ),
               ),
@@ -44,7 +44,7 @@ class SplashScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  text: 'Tissue Whooper',
+                  text: 'Tissuein Aja!',
                 ))),
           ],
         ),

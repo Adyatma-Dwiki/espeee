@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:animate_do/animate_do.dart';
-import 'package:espeee/GridView.dart';
+import 'package:espeee/HomePage.dart';
 
 
 import 'package:flutter/material.dart';
@@ -19,10 +19,10 @@ class _LoadscreenState extends State<Loadscreen> {
   void initState() {
     super.initState();
     
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => GridPage(), 
+          builder: (context) => HomePage(), 
         ),
       );
     });
